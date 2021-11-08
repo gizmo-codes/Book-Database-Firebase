@@ -1,7 +1,7 @@
 /* Code heavily modified from youtube tutorial: https://www.youtube.com/playlist?list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB */
 
 body {
-  /*  background: #83b1fc; */
+    /*  background: #83b1fc; */
     background: rgb(32, 32, 32);
     font-family: 'Cagliostro';
     margin: 0;
@@ -11,12 +11,52 @@ body {
 /*************************************
 **** Style the NEW navigation bar ****
 *************************************/
+h3
+{
+-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+-moz-animation: fadein 2s; /* Firefox < 16 */
+ -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+     animation: fadein 2s;
+}
+
+@keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
 
 .navbar {
     width: 100%;
     background-color: #555;
-    overflow: auto;
-    position: sticky;
+    overflow: hidden;
+}
+
+.spanmod {
+    color: red;
 }
 
 /* Navbar links */
@@ -34,7 +74,7 @@ body {
 /* Navbar links on mouse-over */
 
 .navbar a:hover {
-    background-color: rgb(202, 10, 10);
+    background-color: rgb(79, 172, 190);
     transition: all 0s;
 }
 
@@ -46,17 +86,20 @@ body {
 
 /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
     .navbar a {
         float: none;
         display: block;
+    }
+    #navbannerlogo {
+        display: none;
     }
 }
 
 #navbannerlogo {
     padding: 12px;
     text-align: center;
-    position: fixed;
+    position: absolute;
     justify-content: center;
     float: left;
     font-size: 22px;
@@ -64,7 +107,7 @@ body {
     color: white;
 }
 
-#navbannerlogo a:hover {
+#navbannerlogo:hover {
     transition: all 0s;
     background: none;
 }
@@ -75,13 +118,54 @@ h1 {
     color: #fff;
     font-size: 64px;
     letter-spacing: 2px;
-    margin-top: 80px;
+    margin-top: 50px;
     text-align: center;
     font-family: 'Cagliostro';
+    cursor: default;
+}
+
+#courseHeader {
+    display: none;
+}
+
+#courseHeaderText {
+    font-size: 36px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    margin: 0;
+    display: none;
+}
+
+#advancedHeaderText {
+    font-size: 33px;
+    color: #ffffff;
+    text-align: center;
+    /*    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+    margin: 0;
+}
+
+#advanced-search-button {
+    background-color: rgb(47, 179, 255);
+    color: white;
+    padding: 11px 22px;
+    border: none;
+    cursor: pointer;
+    position: flex;
+    margin-top: 3px;
+    margin-left: 3px;
+    width: 82%;
+}
+
+#resultsHeader {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 0;
 }
 
 /* Background behind search bar */
-.content {
+
+.index-content {
     background: rgb(153, 153, 153);
     max-width: 960px;
     margin: 30px auto;
@@ -90,21 +174,111 @@ h1 {
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1)
 }
 
+.search-content {
+    background: rgb(153, 153, 153);
+    float: right;
+    max-width: 65%;
+    min-width: 50%;
+    position: flex;
+    margin: 30px auto;
+    padding: 10px 10px;
+    margin-right: 75px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1)
+}
+
+.search-content-fields {
+    background: rgb(153, 153, 153);
+    float: left;
+    max-width: 25%;
+    min-width: 25%;
+    position: flex;
+    margin: 30px auto;
+    padding: 30px 30px;
+    margin-left: 75px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1)
+}
+
+.search-course-form {
+    border-radius: 10px 10px 10px 10px;
+}
+
+#search-button {
+    background-color: rgb(47, 179, 255);
+    color: white;
+    padding: 11px 22px;
+    border: none;
+    cursor: pointer;
+    position: flex;
+    margin-top: 3px;
+}
+
+input[type=text], textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #DDDDDD;
+}
+
+input[type=text]:focus, textarea:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+#confirm-delete-overlay-buttons {
+    margin-left: 25%;
+    width: 30%;
+    box-shadow: none;
+    border-radius: 10px 10px 10px 10px;
+    padding: 9px 22px;
+    border: none;
+    cursor: pointer;
+}
+
+#editBook-overlay-buttons {
+    background-color: rgb(47, 179, 255);
+    color: white;
+    padding: 11px 22px;
+    border: none;
+    cursor: pointer;
+    position: flex;
+    margin-top: 3px;
+    width: 30%;
+    margin-left: 3px;
+}
+
 /**********************************
 ***** Format list of results ******
 **********************************/
 
-.delete-cross
-{
+.delete-cross {
     color: rgb(248, 129, 129);
     background: rgb(231, 231, 231);
+    border-radius: 10px 10px 10px 10px;
 }
 
-.delete-cross:hover
-{
+.delete-cross:hover {
     transition: background-color .5s ease-in-out;
-    color: red;
-    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    background: rgb(255, 0, 0);
+}
+
+.edit-E {
+    background: url(../images/edit.jpg) no-repeat;
+    opacity: 60%;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.edit-E:hover {
+    transition: opacity .5s ease-in-out;
+    opacity: 100%;
 }
 
 ul {
@@ -112,15 +286,24 @@ ul {
     padding: 0;
 }
 
+/* Format results */
+
+#course-list {
+    display: none;
+}
+
 li {
     padding: 15px;
+    margin-bottom: 5px;
     background: #f6f6f6;
     font-size: 20px;
+    white-space: pre;
     color: #555;
     position: relative;
     border-bottom: 1px solid #e6e6e6;
-    width: 920px;
+    width: flex;
     justify-content: center;
+    border-radius: 10px;
 }
 
 li:nth-child(even) {
@@ -140,33 +323,46 @@ li span:nth-child(2) {
     justify-content: center;
 }
 
-li div {
+li .delete-cross {
     position: absolute;
     top: 0;
     right: 0px;
     background: rgba(255, 255, 255, 0.6);
     width: 40px;
     text-align: center;
-    padding: 10px 0;
+    border: 1px solid red;
+    padding: 8px 0;
     font-weight: bold;
     cursor: pointer;
 }
 
-/*
-form input{
-    float: left;
-    width: 27%;
-    border-radius: 10px 10px 10px 10px;
-    background: rgb(242, 242, 242);
-    margin: 3px 3px;
-    padding: 10px;
-    display: flex;
-    box-sizing: border-box;
-    font-size: 14px;
+li .edit-E {
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    background: url(../images/edit.jpg) no-repeat center center;
+    width: 40px;
+    height: 40px;
+    opacity: 60%;
+    border: 1px solid rgb(1, 160, 62);
+    cursor: pointer;
 }
-*/
 
-#add-institution-form input {
+/*
+    form input{
+        float: left;
+        width: 27%;
+        border-radius: 10px 10px 10px 10px;
+        background: rgb(242, 242, 242);
+        margin: 3px 3px;
+        padding: 10px;
+        display: flex;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    */
+
+/*#add-institution-form input {
     float: left;
     width: 27%;
     border-radius: 10px 10px 10px 10px;
@@ -176,7 +372,7 @@ form input{
     display: flex;
     box-sizing: border-box;
     font-size: 14px;
-}
+}*/
 
 #add-course-form input {
     float: left;
@@ -194,9 +390,9 @@ form input{
     float: left;
     width: 82%;
     border-radius: 10px 10px 10px 10px;
-    background: rgb(242, 242, 242);
+    background: rgb(240, 240, 240);
     margin: 3px 3px;
-    padding: 10px;
+    padding: 11px;
     display: flex;
     box-sizing: border-box;
     font-size: 14px;
@@ -214,10 +410,32 @@ form:after {
     display: block;
 }
 
+/* Specific Buttons */
+
+#addBook-overlay-buttons {
+    background-color: rgb(47, 179, 255);
+    color: white;
+    padding: 11px 22px;
+    border: none;
+    cursor: pointer;
+    position: flex;
+    margin-top: 3px;
+    width: 30%;
+    margin-left: 3px;
+}
+
+#addBook-cancel {
+    left: 10%;
+    top: 50%;
+    position: relative;
+    width: 25%;
+    cursor: pointer;
+}
+
 /*************************/
 
-
 /* Formatting ALL buttons */
+
 button {
     background: rgb(240, 240, 240);
     margin-left: 10px;
@@ -229,11 +447,33 @@ button {
     font-family: Cagliostro;
     letter-spacing: 1px;
     color: rgb(99, 99, 99);
+    cursor: pointer;
 }
 
-/*******************************************************
-************  OLD NAV BANNER  **************************
-*******************************************************/
+/* Add Book form fields layout */
+
+form p {
+    float: left;
+    width: 49%;
+}
+
+form p:not(:nth-child(2n)) {
+    margin-right: 2%;
+}
+
+form p:last-child {
+    clear: both;
+    width: 100%;
+}
+
+form p:nth-last-child(2) {
+    clear: both;
+    width: 100%;
+}
+
+/*******************************************
+************  OLD NAV BANNER  **************
+*******************************************/
 
 /*Entire navbanner*/
 
@@ -284,9 +524,15 @@ div {
 
 /********************************************/
 
-/* LOG IN FORM START */
+/***********************
+****** LOGIN FORM ******
+************************/
 
 /* Full-width input fields */
+
+label {
+    color: white;
+}
 
 input[type=text], input[type=password] {
     width: 100%;
@@ -306,7 +552,12 @@ input[type=text], input[type=password] {
     margin: 8px 0;
     border: none;
     cursor: pointer;
+    position: flex;
     width: 100%;
+}
+
+#cancelCancelBtn {
+    width: 15%;
 }
 
 button:hover {
@@ -329,6 +580,7 @@ button:hover {
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
+    background-color: #5e5e5e;
 }
 
 img.avatar {
@@ -336,13 +588,18 @@ img.avatar {
     border-radius: 50%;
 }
 
+img.avatar2 {
+    width: 17%;
+    border-radius: 50%;
+}
+
 .container {
-    padding: 16px;
+    padding: 12px;
 }
 
 span.psw {
     float: right;
-    padding-top: 16px;
+    padding-top: 12px;
 }
 
 /* The Modal (background) */
@@ -361,7 +618,7 @@ span.psw {
     height: 100%;
     /* Full height */
     /*  overflow: auto; HIDDEN
-    /* Enable scroll if needed */
+        /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
     /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
@@ -372,13 +629,130 @@ span.psw {
 /* Modal Content/Box */
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #5e5e5e;
     margin: 5% auto 15% auto;
     /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 50%;
+    border-radius: 10px 10px 10px 10px;
+    /* Rounded corners */
+    border: 2px solid rgb(35, 160, 24);
+    width: 30%;
     /* Could be more or less, depending on screen size */
     height: 70%;
+}
+
+/* The Modal Add Book (background) */
+
+.modal_2 {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /*  overflow: auto; HIDDEN
+        /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Add Book Content/Box */
+
+.modal_2-content {
+    background-color: #5e5e5e;
+    margin: 0% auto 0% auto;
+    /* 0% from the top, 0% from the bottom and centered */
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    width: 50%;
+    /* Could be more or less, depending on screen size */
+    height: 85%;
+}
+
+/* The Modal Edit Book (background) */
+
+.modal_3 {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /*  overflow: auto; HIDDEN
+        /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Edit Book Content/Box */
+
+.modal_3-content {
+    background-color: #5e5e5e;
+    margin: 0% auto 0% auto;
+    /* 0% from the top, 0% from the bottom and centered */
+    border: 2px solid rgb(47, 179, 255);
+    border-radius: 10px 10px 10px 10px;
+    width: 50%;
+    /* Could be more or less, depending on screen size */
+    height: 85%;
+}
+
+/* Modal for confirm delete*/
+
+.modal_4 {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 15%;
+    margin-bottom: 35%;
+    width: 50%;
+    height: 20%;
+    background-color: #5e5e5e;
+    border: 2px solid rgb(200, 0, 0);
+    border-radius: 10px 10px 10px 10px;
+}
+
+/* Add Book Form Layout */
+
+form p {
+    float: left;
+    width: 49%;
+}
+
+form p:not(:nth-child(2n)) {
+    margin-right: 2%;
+}
+
+form p:last-child {
+    clear: both;
+    width: 100%;
+}
+
+form p:nth-last-child(2) {
+    clear: both;
+    width: 100%;
 }
 
 /* The Close Button (x) */
@@ -387,7 +761,7 @@ span.psw {
     position: absolute;
     right: 25px;
     top: 0;
-    color: #000;
+    color: rgb(255, 255, 255);
     font-size: 35px;
     font-weight: bold;
 }
@@ -434,9 +808,11 @@ span.psw {
     }
 }
 
-/* LOG IN FORM END */
+/********** LOG IN FORM END **********/
 
-/* LANDING PAGE ANIMATION START */
+/***********************************
+****** LANDING PAGE ANIMATION ******
+***********************************/
 
 .rw-wrapper {
     width: 80%;
@@ -444,6 +820,7 @@ span.psw {
     margin: 1px auto 0 auto;
     font-family: 'Bree Serif';
     padding: 10px;
+    cursor: default;
 }
 
 .rw-sentence {
@@ -479,35 +856,35 @@ span.psw {
     -webkit-animation-delay: 3s;
     -ms-animation-delay: 3s;
     animation-delay: 3s;
-    color: #9086b4;
+    color: rgb(192, 127, 253);
 }
 
 .rw-words-1 span:nth-child(3) {
     -webkit-animation-delay: 6s;
     -ms-animation-delay: 6s;
     animation-delay: 6s;
-    color: #6b739d;
+    color: #ff9933;
 }
 
 .rw-words-1 span:nth-child(4) {
     -webkit-animation-delay: 9s;
     -ms-animation-delay: 9s;
     animation-delay: 9s;
-    color: #7a6b9d;
+    color: #ff93ce;
 }
 
 .rw-words-1 span:nth-child(5) {
     -webkit-animation-delay: 12s;
     -ms-animation-delay: 12s;
     animation-delay: 12s;
-    color: #8d6b9d;
+    color: #82e279;
 }
 
 .rw-words-1 span:nth-child(6) {
     -webkit-animation-delay: 15s;
     -ms-animation-delay: 15s;
     animation-delay: 15s;
-    color: #9b6b9d;
+    color: #fff27a;
 }
 
 @-webkit-keyframes rotateWord {
@@ -610,4 +987,4 @@ span.psw {
     }
 }
 
-/* LANDING PAGE ANIMATION END */
+/********** LANDING PAGE ANIMATION END **********/

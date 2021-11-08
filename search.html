@@ -3,10 +3,19 @@
 <html>
 
 <head>
+    <!-- METADATA -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Book Database">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript,Database,Firestore,Firebase,DTCC,Del-Tech,Book,Books">
+    <meta name="author" content="Matt Chandler">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href='https://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-functions.js"></script>
     <!--<script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>-->
     <link rel="stylesheet" href="css\styles.css">
 </head>
@@ -16,9 +25,15 @@
     <div class="navbar">
         <a id="navbannerlogo" href="index.html">Course Books</a>
         <a href="index.html"><i class="fa fa-fw fa-home"></i>Home</a>
-        <a class="active" href="search.html"><i class="fa fa-fw fa-search"></i>Advanced Search</a>
-        <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-fw fa-user"></i>Login</a>
+        <a href="#" id="addBookNav" onclick="document.getElementById('id02').style.display='block'"
+            style="width:auto;"><i class="fa fa-fw fa-plus-square"></i> Add Book</a>
+        <a href="search.html" class="active"><i class="fa fa-fw fa-search-plus"></i> Advanced Search</a>
+        <a href="#" id="login" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i
+                class="fa fa-fw fa-user"></i>Login</a>
+        <a href="#" id="logout" style="width:auto; display:none;"><i class="fa fa-fw fa-user"></i>Logout</a>
     </div>
+
+
 
     <!-- LOG IN FORM START-->
 
@@ -34,12 +49,13 @@
 
             <div class="container">
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input id="username" type="text" placeholder="Enter Username" name="uname" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input id="password" type="password" placeholder="Enter Password" name="psw" required>
 
-                <button id="login-overlay-buttons" type="submit">Login</button>
+                <button id="login-overlay-buttons" type="submit"
+                    onclick="document.getElementById('id01').style.display='none'">Login</button>
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
@@ -53,6 +69,7 @@
         </form>
     </div>
 
+    <!--
     <script>
         // Get the modal
         var modal = document.getElementById('id01');
@@ -64,49 +81,243 @@
             }
         }
     </script>
+    -->
 
-    <h1>Course Books</h1>
+    <!-- Add BOOK FORM START-->
 
-    <h2 style="text-align:center;">Search by any information.</h2>
 
-    <div class="content">
+    <div id="id02" class="modal_2">
 
+        <form id="add-book-form" class="modal_2-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id02').style.display='none'" class="close"
+                    title="Close">&times;</span>
+                <img src="images\dtcc.png" alt="Avatar" class="avatar2">
+            </div>
+
+            <div class="container">
+
+
+                <p>
+                    <label for="semester"><b>Semester</b></label>
+                    <input type="text" placeholder="Enter Semester" name=semester required>
+                </p>
+
+                <p>
+                    <label for="courseTitle"><b>Course Title</b></label>
+                    <input type="text" placeholder="Enter Course Title" name=courseTitle required>
+                </p>
+
+
+                <p>
+                    <label for="courseNumber"><b>Course Number</b></label>
+                    <input type="text" placeholder="Enter Course Number" name=courseNumber required>
+                </p>
+
+                <p>
+                    <label for="bookISBN"><b>ISBN</b></label>
+                    <input type="text" placeholder="Enter ISBN" name=bookISBN required>
+                </p>
+
+                <p>
+                    <label for="bookTitle"><b>Book Title</b></label>
+                    <input type="text" placeholder="Enter Book Title" name=bookTitle required>
+                </p>
+
+
+                <p>
+                    <label for="courseLead"><b>Course Lead</b></label>
+                    <input type="text" placeholder="Enter Course Lead" name=courseLead required>
+                </p>
+
+                <p>
+                    <label for="courseLeadName"><b>Course Lead Name</b></label>
+                    <input type="text" placeholder="Enter Course Lead Name" name=courseLeadName required>
+                </p>
+
+                <p>
+                    <label for="notes"><b>Notes</b></label>
+                    <input type="text" placeholder="#" name=notes required>
+                </p>
+
+                <button id="addBook-overlay-buttons">Add Book</button>
+                <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+
+
+            </div>
+
+        </form>
+    </div>
+
+    <!--
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    -->
+
+
+    <!--ADD BOOK FORM END-->
+
+
+    <!--EDIT BOOK FORM START-->
+
+
+    <div id="id03" class="modal_3">
+
+        <form id="edit-book-form" class="modal_3-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id03').style.display='none'" class="close"
+                    title="Close">&times;</span>
+                <img src="images\edit-modal.png" alt="Avatar" class="avatar2" id="edit">
+            </div>
+
+            <div class="container">
+
+
+                <p>
+                    <label for="semester"><b>Semester</b></label>
+                    <input type="text" placeholder="Enter Semester" name=semester required>
+                </p>
+
+                <p>
+                    <label for="courseTitle"><b>Course Title</b></label>
+                    <input type="text" placeholder="Enter Course Title" name=courseTitle required>
+                </p>
+
+
+                <p>
+                    <label for="courseNumber"><b>Course Number</b></label>
+                    <input type="text" placeholder="Enter Course Number" name=courseNumber required>
+                </p>
+
+                <p>
+                    <label for="bookISBN"><b>ISBN</b></label>
+                    <input type="text" placeholder="Enter ISBN" name=bookISBN required>
+                </p>
+
+                <p>
+                    <label for="bookTitle"><b>Book Title</b></label>
+                    <input type="text" placeholder="Enter Book Title" name=bookTitle required>
+                </p>
+
+
+                <p>
+                    <label for="courseLead"><b>Course Lead</b></label>
+                    <input type="text" placeholder="Enter Course Lead" name=courseLead required>
+                </p>
+
+                <p>
+                    <label for="courseLeadName"><b>Course Lead Name</b></label>
+                    <input type="text" placeholder="Enter Course Lead Name" name=courseLeadName required>
+                </p>
+
+                <p>
+                    <label for="notes"><b>Notes</b></label>
+                    <input type="text" placeholder="#" name=notes required>
+                </p>
+
+                <button type="button" id="editBook-overlay-buttons">Edit Book</button>
+                <button type="button" onclick="document.getElementById('id03').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+
+
+            </div>
+
+        </form>
+    </div>
+
+    <!--
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id03');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    -->
+
+    <!--CONFIRM CLOSE SCREEN START-->
+
+    <div id="id04" class="modal_4">
+
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id04').style.display='none'" class="close"
+                title="Close">&times;</span>
+        </div>
+
+        <div class="confirmDeleteWords">
+            <center>
+                <h3 style="color: white">Are you sure you want to delete this book?</h2>
+            </center>
+        </div>
+
+        <div class="container">
+
+            <button type="button" id="confirm-delete-overlay-buttons">Delete Book</button>
+            <button type="button" id="cancelCancelBtn" onclick="document.getElementById('id04').style.display='none'"
+                class="cancelbtn">Cancel</button>
+
+
+        </div>
+    </div>
+
+
+    <!--CONFIRM CLOSE SCREEN END-->
+
+
+    <h1>Course Books Database</h1>
+    <!--EDIT BOOK FORM END-->
+    <div class="search-content-fields">
+        <h2 id="advancedHeaderText">Search</h2>
         <form id="search-form">
-            <input type="search" name=search placeholder="Search Anything">
-            <button id="search-button">Search</button>
-        </form>
+            <p>Semester</p>
+            <input type="text" name=semester id="advancedSearchSemester" placeholder="Semester: YYYYDD">
+            <p></p>
+            <p></p>
 
+            <p>Course Information</p>
+            <input type="text" name=courseTitle id="advancedSearchCourseTitle" placeholder="Name of Course">
+            <input type="text" name=courseNumber id="advancedSearchCourseNumber" placeholder="Course Number: XXXDDD">
+            <input type="text" name=courseInstructor id="advancedSearchCourseInstructor" placeholder="Course Lead Name">
+            <p></p>
+            <p></p>
+
+
+            <p>Book Information</p>
+            <input type="text" name=bookTitle id="advancedSearchBookTitle" placeholder="Book Title">
+            <input type="text" name=bookISBN id="advancedSearchBookISBN" placeholder="ISBN Number">
+            <input type="text" name=bookChosenBy id="advancedSearchBookChosenBy" placeholder="Initials of Book Adopter">
+            <input type="text" name=notes id="advancedSearchNotes" placeholder="Notes">
+        </form>
+        <button id="advanced-search-button">Search</button>
+    </div>
+
+    <!--Bootleg fix for errors due to the button not existing on this page for the listener-->
+    <button id="search-button" style="display:none"></button>
+
+
+    <div class="search-content">
         <form id="add-course-form">
-            <input type="number" name=semester placeholder="Semester: YYYYXX">
-            <input type="text" name=courseTitle placeholder="Name of Course">
-            <input type="text" name=courseNumber placeholder="Course Number">
-            <input type="text" name=courseInstructor placeholder="Primary Instructor">
-            <input type="text" name=bookTitle placeholder="Book Title">
-            <input type="text" name=bookISBN placeholder="ISBN Number">
-            <!-- <input type="text" name=bookChosenBy placeholder="Insctructor Initials"> 
-                    I'm not sure what this is or if it is needed. -->
-            <input type="text" name=notes placeholder="Notes">
-            <button>Add Course</button>
         </form>
-
-        <form id="add-institution-form">
-            <input type="text" name=name placeholder="Name of Institution">
-            <input type="text" name=location placeholder="Location">
-            <input type="text" name=institutionType placeholder="Type of Institution">
-            <button>Add Institution</button>
-        </form>
-
-
-
-        <ul id="institution-list">
-            <p style=font-size:22px;text-align:center;>Institutions</p><br>
-        </ul>
+        <h2 id="advancedHeaderText">Results</h2>
         <ul id="course-list"><br>
-            <p style=font-size:22px;text-align:center;>Courses</p><br>
         </ul>
         <ul id="results"></ul>
-
     </div>
+
 
     <script>
         // Initialize Firebase
@@ -121,6 +332,7 @@
         firebase.initializeApp(config);
         const db = firebase.firestore();
     </script>
+    <script src="js\jquery-3.3.1.js"></script>
     <script src="js\app.js"></script>
 </body>
 
