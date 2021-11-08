@@ -1,0 +1,613 @@
+/* Code heavily modified from youtube tutorial: https://www.youtube.com/playlist?list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB */
+
+body {
+  /*  background: #83b1fc; */
+    background: rgb(32, 32, 32);
+    font-family: 'Cagliostro';
+    margin: 0;
+    padding: 0;
+}
+
+/*************************************
+**** Style the NEW navigation bar ****
+*************************************/
+
+.navbar {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+    position: sticky;
+}
+
+/* Navbar links */
+
+.navbar a {
+    float: right;
+    text-align: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    transition: background-color .3s ease-in-out;
+}
+
+/* Navbar links on mouse-over */
+
+.navbar a:hover {
+    background-color: rgb(202, 10, 10);
+    transition: all 0s;
+}
+
+/* Current/active navbar link */
+
+.active {
+    background-color: #4CAF50;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+
+#navbannerlogo {
+    padding: 12px;
+    text-align: center;
+    position: fixed;
+    justify-content: center;
+    float: left;
+    font-size: 22px;
+    font-family: 'Cagliostro';
+    color: white;
+}
+
+#navbannerlogo a:hover {
+    transition: all 0s;
+    background: none;
+}
+
+/*********************************/
+
+h1 {
+    color: #fff;
+    font-size: 64px;
+    letter-spacing: 2px;
+    margin-top: 80px;
+    text-align: center;
+    font-family: 'Cagliostro';
+}
+
+/* Background behind search bar */
+.content {
+    background: rgb(153, 153, 153);
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 30px 30px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1)
+}
+
+/**********************************
+***** Format list of results ******
+**********************************/
+
+.delete-cross
+{
+    color: rgb(248, 129, 129);
+    background: rgb(231, 231, 231);
+}
+
+.delete-cross:hover
+{
+    transition: background-color .5s ease-in-out;
+    color: red;
+    background: rgb(0, 0, 0);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 15px;
+    background: #f6f6f6;
+    font-size: 20px;
+    color: #555;
+    position: relative;
+    border-bottom: 1px solid #e6e6e6;
+    width: 920px;
+    justify-content: center;
+}
+
+li:nth-child(even) {
+    padding: 15px;
+    background: #f2f2f2;
+}
+
+li span {
+    display: block;
+    justify-content: center;
+}
+
+li span:nth-child(2) {
+    font-size: 16px;
+    margin-top: 6px;
+    color: #999;
+    justify-content: center;
+}
+
+li div {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: rgba(255, 255, 255, 0.6);
+    width: 40px;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*
+form input{
+    float: left;
+    width: 27%;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(242, 242, 242);
+    margin: 3px 3px;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+*/
+
+#add-institution-form input {
+    float: left;
+    width: 27%;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(242, 242, 242);
+    margin: 3px 3px;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#add-course-form input {
+    float: left;
+    width: 27%;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(242, 242, 242);
+    margin: 3px 3px;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#search-form input {
+    float: left;
+    width: 82%;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(242, 242, 242);
+    margin: 3px 3px;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+form input:focus {
+    outline: 0;
+    border: 2px solid #4286f4;
+    transition: all ease 0.3s;
+}
+
+form:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+/*************************/
+
+
+/* Formatting ALL buttons */
+button {
+    background: rgb(240, 240, 240);
+    margin-left: 10px;
+    border-radius: 10px;
+    padding: 9px;
+    width: 14%;
+    box-shadow: -1px 0px 1px rgba(26, 128, 224, 0.671);
+    font-weight: bold;
+    font-family: Cagliostro;
+    letter-spacing: 1px;
+    color: rgb(99, 99, 99);
+}
+
+/*******************************************************
+************  OLD NAV BANNER  **************************
+*******************************************************/
+
+/*Entire navbanner*/
+
+.navbanner {
+    background-color: #4F4F4F;
+    top: 0em;
+    /*required for sticky to work -- Just enough px so it's below the top banner image*/
+    position: sticky;
+    /*Used to format blocks evenly*/
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    transition-property: color;
+}
+
+/*Links inside the navbanner*/
+
+.navbanner a {
+    /* background-color instead of all here, which uses the background color below for the transition only instead of the whole bar which made wonky animations */
+    transition: background-color .3s ease-in-out;
+    float: left;
+    color: #FFFFFF;
+    padding: 10px 120px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 18px;
+    white-space: nowrap
+}
+
+/*What to change on hover*/
+
+.navbanner a:hover {
+    background-color: #FFFFFF;
+    color: white;
+    transition: all 0s;
+    background: #00afb2;
+}
+
+/*.active tag to keep the current page highlighted*/
+
+.active {
+    background-color: #009EFF;
+}
+
+/********************************************/
+
+/* LOG IN FORM START */
+
+/* Full-width input fields */
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+
+#login-overlay-buttons {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+    border: none;
+    color: white;
+}
+
+/* Center the image and position the close button */
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+img.avatar {
+    width: 20%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    /*  overflow: auto; HIDDEN
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 50%;
+    /* Could be more or less, depending on screen size */
+    height: 70%;
+}
+
+/* The Close Button (x) */
+
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+/* LOG IN FORM END */
+
+/* LANDING PAGE ANIMATION START */
+
+.rw-wrapper {
+    width: 80%;
+    position: relative;
+    margin: 1px auto 0 auto;
+    font-family: 'Bree Serif';
+    padding: 10px;
+}
+
+.rw-sentence {
+    margin: 0;
+    margin-left: 33%;
+    text-align: left;
+    text-shadow: 1px 1px 1px rgb(255, 255, 255);
+}
+
+.rw-sentence span {
+    color: #2db9fa;
+    font-size: 200%;
+    font-weight: normal;
+}
+
+.rw-words {
+    display: inline;
+    text-indent: 10px;
+}
+
+.rw-words-1 span {
+    position: absolute;
+    opacity: 0;
+    overflow: hidden;
+    color: white;
+    /*color: #6b969d;*/
+    -webkit-animation: rotateWord 18s linear infinite 0s;
+    -ms-animation: rotateWord 18s linear infinite 0s;
+    animation: rotateWord 18s linear infinite 0s;
+}
+
+.rw-words-1 span:nth-child(2) {
+    -webkit-animation-delay: 3s;
+    -ms-animation-delay: 3s;
+    animation-delay: 3s;
+    color: #9086b4;
+}
+
+.rw-words-1 span:nth-child(3) {
+    -webkit-animation-delay: 6s;
+    -ms-animation-delay: 6s;
+    animation-delay: 6s;
+    color: #6b739d;
+}
+
+.rw-words-1 span:nth-child(4) {
+    -webkit-animation-delay: 9s;
+    -ms-animation-delay: 9s;
+    animation-delay: 9s;
+    color: #7a6b9d;
+}
+
+.rw-words-1 span:nth-child(5) {
+    -webkit-animation-delay: 12s;
+    -ms-animation-delay: 12s;
+    animation-delay: 12s;
+    color: #8d6b9d;
+}
+
+.rw-words-1 span:nth-child(6) {
+    -webkit-animation-delay: 15s;
+    -ms-animation-delay: 15s;
+    animation-delay: 15s;
+    color: #9b6b9d;
+}
+
+@-webkit-keyframes rotateWord {
+    0% {
+        opacity: 0;
+    }
+    2% {
+        opacity: 0;
+        -webkit-transform: translateY(-30px);
+    }
+    5% {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+    }
+    17% {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+    }
+    20% {
+        opacity: 0;
+        -webkit-transform: translateY(30px);
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-ms-keyframes rotateWord {
+    0% {
+        opacity: 0;
+    }
+    2% {
+        opacity: 0;
+        -ms-transform: translateY(-30px);
+    }
+    5% {
+        opacity: 1;
+        -ms-transform: translateY(0px);
+    }
+    17% {
+        opacity: 1;
+        -ms-transform: translateY(0px);
+    }
+    20% {
+        opacity: 0;
+        -ms-transform: translateY(30px);
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes rotateWord {
+    0% {
+        opacity: 0;
+    }
+    2% {
+        opacity: 0;
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+    5% {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+    17% {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+    20% {
+        opacity: 0;
+        -webkit-transform: translateY(30px);
+        transform: translateY(30px);
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .rw-sentence {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .rw-sentence {
+        font-size: 9px;
+    }
+}
+
+/* LANDING PAGE ANIMATION END */

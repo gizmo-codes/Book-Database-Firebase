@@ -1,0 +1,120 @@
+<!-- Code heavily modified from youtube tutorial: https://www.youtube.com/playlist?list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB -->
+
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>-->
+    <link rel="stylesheet" href="css\styles.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a id="navbannerlogo" href="index.html">Course Books</a>
+        <a class="active" href="index.html"><i class="fa fa-fw fa-home"></i>Home</a>
+        <a href="search.html"><i class="fa fa-fw fa-search"></i>Advanced Search</a>
+        <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-fw fa-user"></i>Login</a>
+    </div>
+
+    <!-- LOG IN FORM START-->
+
+
+    <div id="id01" class="modal">
+
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                    title="Close Modal">&times;</span>
+                <img src="images\dtcc.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button id="login-overlay-buttons" type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+                <span class="psw"><a href="#">Forgot password?</a></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <!--LOG IN FORM END-->
+
+
+    <h1>Course Books</h1>
+
+    <!--OLD TITLE
+        <h2 style="text-align: center; font-size: 25px; color: rgb(235, 235, 235);">Search for a course.</h2> -->
+    <!--NEW SWEET ANIMATED TITLE-->
+    <section class="rw-wrapper">
+        <h2 class="rw-sentence">
+            <span>Search by </span>
+            <div class="rw-words rw-words-1">
+                <span>anything.</span>
+                <span>course name.</span>
+                <span>course number.</span>
+                <span>primary instructor.</span>
+                <span>book title.</span>
+                <span>ISBN.</span>
+            </div>
+        </h2>
+    </section>
+    <!--	 <h2 class="rw-sentence-IE">Search by anything.</h2> -->
+
+    <div class="content">
+
+        <form id="search-form">
+            <input type="search" name=search placeholder="Search Anything">
+            <button id="search-button">Search</button>
+        </form>
+
+
+        <!-- <ul id="results"><p style=font-size:22px;text-align:center;></p></ul> -->
+
+    </div>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB3MbkGk9IIJPe-wqpDL4H1WMfyVdPKEjE",
+            authDomain: "course-required-textbooks.firebaseapp.com",
+            databaseURL: "https://course-required-textbooks.firebaseio.com",
+            projectId: "course-required-textbooks",
+            storageBucket: "course-required-textbooks.appspot.com",
+            messagingSenderId: "934459633602"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+    </script>
+    <script src="js\app.js"></script>
+</body>
+
+</html>
