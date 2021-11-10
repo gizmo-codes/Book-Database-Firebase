@@ -162,7 +162,10 @@ searchDatabase.addEventListener("click", (e) => {
 
     //User input from the serach bar saved as a variable
     var input = document.getElementById("homeSearchInput").value;
+
+    //Lowercase the input to prevent case-sensitive matches.
     input = input.toLowerCase();
+    
     var hit = false;
 
     //Empty the list to only show hits
