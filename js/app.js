@@ -162,6 +162,7 @@ searchDatabase.addEventListener("click", (e) => {
 
     //User input from the serach bar saved as a variable
     var input = document.getElementById("homeSearchInput").value;
+    input = input.toLowerCase();
     var hit = false;
 
     //Empty the list to only show hits
@@ -171,35 +172,35 @@ searchDatabase.addEventListener("click", (e) => {
     //Match logic
     db.collection('Course').orderBy("courseNumber").get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
-            if (doc.data().semester == input) {
+            if (doc.data().semester.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
-            if (doc.data().courseTitle == input || doc.data().courseTitle.toLowerCase() == input) {
+            if (doc.data().courseTitle.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
-            if (doc.data().courseNumber == input || doc.data().courseNumber.toLowerCase() == input) {
+            if (doc.data().courseNumber.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
-            if (doc.data().courseLead == input || doc.data().courseLead.toLowerCase() == input) {
+            if (doc.data().courseLead.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
-            if (doc.data().courseLeadName == input || doc.data().courseLeadName.toLowerCase() == input) {
+            if (doc.data().courseLeadName.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
-            if (doc.data().bookTitle == input || doc.data().bookTitle.toLowerCase() == input) {
+            if (doc.data().bookTitle.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
-            if (doc.data().bookISBN == input || doc.data().bookISBN.toLowerCase() == input) {
+            if (doc.data().bookISBN.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
-            if (doc.data().notes == input || doc.data().notes.toLowerCase() == input) {
+            if (doc.data().notes.toLowerCase() == input) {
                 hit = true;
                 renderCourse(doc);
             }
@@ -263,13 +264,13 @@ advancedSearchDatabase.addEventListener("click", (e) => {
 	db.collection("Course").orderBy("courseNumber").get().then((snapshot) => {
 		snapshot.docs.forEach(doc => {
 			if(doc.data().semester == semesterInput || semesterInput == "") {
-				if(doc.data().courseTitle == courseTitleInput || doc.data().courseTitle.toLowerCase() == courseTitleInput || courseTitleInput == "") {
-					if(doc.data().courseNumber == courseNumberInput || doc.data().courseNumber.toLowerCase() == courseNumberInput || courseNumberInput == "") {
-						if(doc.data().bookTitle == bookTitleInput || doc.data().bookTitle.toLowerCase() == bookTitleInput || bookTitleInput == "") {
-							if(doc.data().courseLead == bookChosenByInput || doc.data().courseLead.toLowerCase() == bookChosenByInput || bookChosenByInput == "") {
-								if(doc.data().bookISBN == bookISBNInput || doc.data().bookISBN.toLowerCase() == bookISBNInput || bookISBNInput == "") {
-									if(doc.data().courseLeadName == courseInstructorInput || doc.data().courseLeadName.toLowerCase() == courseInstructorInput || courseInstructorInput == "") {
-										if(doc.data().notes == notesInput || doc.data().notes.toLowerCase() == notesInput || notesInput == "") {
+				if(doc.data().courseTitle.toLowerCase() == courseTitleInput.toLowerCase() || courseTitleInput == "") {
+					if(doc.data().courseNumber == courseNumberInput || courseNumberInput == "") {
+						if(doc.data().bookTitle.toLowerCase() == bookTitleInput.toLowerCase() || bookTitleInput == "") {
+							if(doc.data().courseLead.toLowerCase() == bookChosenByInput.toLowerCase() || bookChosenByInput == "") {
+								if(doc.data().bookISBN.toLowerCase() == bookISBNInput.toLowerCase() || bookISBNInput == "") {
+									if(doc.data().courseLeadName.toLowerCase() == courseInstructorInput.toLowerCase() || courseInstructorInput == "") {
+										if(doc.data().notes == notesInput.toLowerCase() || notesInput == "") {
 											hit = true;
 											renderCourse(doc);
 										}
