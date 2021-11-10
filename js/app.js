@@ -144,6 +144,13 @@ function renderCourse(doc) {
 
     });
 
+
+    //TODO: FIX THE BELOW NOTES
+
+    //--------------------------
+
+    //This is editable through HTML, this should be a check above adding/deleting/editing itself.
+    //Leaving this here is fine as well just not completely functional.
     if (firebase.auth().currentUser) {
         cross.style.display = "block"
         edit.style.display = "block"
@@ -165,7 +172,7 @@ searchDatabase.addEventListener("click", (e) => {
 
     //Lowercase the input to prevent case-sensitive matches.
     input = input.toLowerCase();
-    
+
     var hit = false;
 
     //Empty the list to only show hits
