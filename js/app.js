@@ -407,7 +407,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
             e[i].style.display = "block";
         }
 
-    }//sean wuz here
+    }
     else {
         document.getElementById('login').style.display = 'block'
         document.getElementById('logout').style.display = 'none'
